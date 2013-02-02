@@ -5,7 +5,6 @@
 var express         = require('express')
   , passport        = require('passport')
   , LocalStrategy   = require('passport-local').Strategy
-  , TwitterStrategy = require('passport-twitter').Strategy
   , mongoose        = require('mongoose')
   , MongoStore      = require('connect-mongo')(express)
   , config          = require('config')
@@ -26,25 +25,6 @@ passport.use(new LocalStrategy(
 		);
 	}
 ));
-
-passport.use(new TwitterStrategy({
-	consumerKey: config.twitter.consummerKey,
-	consumerSecret: config.twitter.consumerSecret,
-	callbackURL: '/auth/twitter/callback'
-}, function(token, tokenSecret, profile, done) {
-	// User.findOrCreate(..., function(err, user) {
-	// 	if (err) { return done(err); }
-	// 	done(null, user);
-	// });
-
-	User.findOne(
-		{ username: 'fnobi' },
-		function (err, user) {
-			done(err, user);
-		}
-	);
-
-}));
 
 passport.serializeUser(function(user, done) {
 	done(null, user.username);
@@ -93,12 +73,6 @@ app.post('/login', passport.authenticate('local', {
 });
 
 app.post('/signup', routes.signup);
-
-app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-	successRedirect: '/',
-        failureRedirect: '/login'
-}));
 
 app.get('/logout', function(req, res){
 	req.logout();

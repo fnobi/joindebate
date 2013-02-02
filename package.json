@@ -12,7 +12,6 @@
     "config": "*",
     "passport": "*",
     "passport-local": "*",
-    "passport-twitter": "*",
     "mongoose": "*",
     "connect-mongo": "*",
     "start-stop-daemon": "*"

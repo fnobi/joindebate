@@ -11,31 +11,4 @@ var UserSchema = new Schema({
 
 var User = mongoose.model('User', UserSchema);
 
-User.find(function (err, users) {
-	users.forEach(function (user) {
-		console.log('%s: %s', user.username, user.password);
-	});
-});
-
-// var user = new User();
-// user.username = 'fnobi';
-// user.password = 'hogehoge';
-// user.save(function(err) {
-// 	if (err) { console.log(err); }
-// });
-
-// User.findOne({
-// 	'username': 'fnobi'
-// }, 'username password', function (err, user) {
-// 	if (err) {
-// 		console.error(err);
-// 		process.exit();
-// 	}
-// 	console.log(
-// 		'%s:%s',
-// 		user.username,
-// 		user.password
-// 	);
-// });
-
 module.exports.User = User;
